@@ -1,12 +1,19 @@
-    #!/bin/bash
-    ARCH=amd64
-    PLATFORM=$(uname -s)_$ARCH
+#!/bin/bash
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
 
-    growpart /dev/xvda      ``````````````````````````````````````````````````````````````````````````````````````           4
-    lvextend -l +50%FREE /dev/RootVG/rootVol
-    lvextend -l +50%FREE /dev/RootVG/varVol
-    xfs_growfs /
-    xfs_growfs /var
+# growpart /dev/xvda 4
+# lvextend -l +50%FREE /dev/RootVG/rootVol
+# lvextend -l +50%FREE /dev/RootVG/varVol
+# xfs_growfs /
+# xfs_growfs /var
+
+sudo growpart /dev/xvda 4
+ sudo pvresize /dev/xvda4
+sudo vgdisplay RootVG
+ sudo lvextend -l +100%FREE /dev/RootVG/rootVol
+sudo xfs_growfs /
+
 
 dnf -y install dnf-plugins-core
 dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
