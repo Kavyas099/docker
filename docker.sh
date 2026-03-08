@@ -8,12 +8,17 @@ PLATFORM=$(uname -s)_$ARCH
 # xfs_growfs /
 # xfs_growfs /var
 
-sudo growpart /dev/xvda 4
- sudo pvresize /dev/xvda4
+sudo growpart /dev/nvme0n1 4
+ sudo pvresize /dev/nvme0n1p4
 sudo vgdisplay RootVG
  sudo lvextend -l +100%FREE /dev/RootVG/rootVol
 sudo xfs_growfs /
 
+
+
+xfs_growfs /home
+xfs_growfs /var/tmp
+xfs_growfs /var
 
 dnf -y install dnf-plugins-core
 dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
