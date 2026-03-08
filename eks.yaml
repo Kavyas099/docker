@@ -2,11 +2,11 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: robo
+  name: expense
   region: us-east-2
 
 managedNodeGroups:
-  - name: robo
+  - name: expense
     instanceTypes:
       - m5.large
       - c5.large
