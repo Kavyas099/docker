@@ -2,19 +2,16 @@
 ARCH=amd64
 PLATFORM=$(uname -s)_$ARCH
 
-# growpart /dev/xvda 4
-# lvextend -l +50%FREE /dev/RootVG/rootVol
-# lvextend -l +50%FREE /dev/RootVG/varVol
-# xfs_growfs /
-# xfs_growfs /var
 
 sudo growpart /dev/nvme0n1 4
  sudo pvresize /dev/nvme0n1p4
 sudo vgdisplay RootVG
- sudo lvextend -l +100%FREE /dev/RootVG/rootVol
+ 
+
+sudo lvextend -l +50%FREE /dev/RootVG/rootVol
 sudo xfs_growfs /
-
-
+sudo lvextend -l +100%FREE /dev/RootVG/varVol
+sudo xfs_growfs /var
 
 xfs_growfs /home
 xfs_growfs /var/tmp
